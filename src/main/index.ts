@@ -61,8 +61,10 @@ const main = async () => {
 
   electronApp.whenReady().then(async () => {
     if (process.platform === 'darwin') {
-        electronApp.dock.hide()
-        
+        if (electronApp.dock) {
+          electronApp.dock.hide()
+        }
+
         const hasAccess = await systemPreferences.askForMediaAccess('microphone');
         if (!hasAccess) {
             await dialog.showMessageBox({
