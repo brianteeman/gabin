@@ -7,6 +7,7 @@ on:
       - main
       - pre-release
       - test
+      - macos-sequoia-crash
 
 jobs:
   build-and-publish:
@@ -43,7 +44,6 @@ jobs:
         security unlock-keychain -p action build.keychain
         security import certificate.p12 -k build.keychain -P ${{ secrets.MACOS_CERT_PASSWORD }} -T /usr/bin/codesign
         security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k action build.keychain
-          
 
     - name: Set up Node.js
       uses: actions/setup-node@v2
